@@ -7,10 +7,10 @@ class PYGAME_WINDOW:
         self.screen = pygame.display.set_mode((pygameWindowWidth,pygameWindowDepth))
 
     def Prepare(self):
-        self.screen.fill([255,255,255])
+        self.screen.fill(WHITE)
 
     def Reveal(self):
         pygame.display.update()
     
     def Draw_Black_Circle(self,x,y):
-        pygame.draw.circle(self.screen, (0, 0, 0), [x, y], 50, 10)
+        pygame.draw.circle(self.screen, BLACK, [x, y], 50)
