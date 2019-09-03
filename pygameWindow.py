@@ -11,6 +11,7 @@ class PYGAME_WINDOW:
 
     def Reveal(self):
         pygame.display.update()
+        
     
     def Draw_Black_Circle(self,x,y):
-        pygame.draw.circle(self.screen, BLACK, [x, y], 50)
+        pygame.draw.circle(self.screen, BLACK, (x, y), 20)

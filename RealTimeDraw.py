@@ -1,4 +1,5 @@
 from pygameWindow import PYGAME_WINDOW
+import random
 
 pygameWindow = PYGAME_WINDOW()
 
