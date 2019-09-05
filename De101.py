@@ -4,6 +4,7 @@ sys.path.insert(0, '..')
 
 import Leap
 import random
+from constants import *
 from pygameWindow import PYGAME_WINDOW
 pygameWindow = PYGAME_WINDOW()
 global x, y, xMin, xMax, yMin, yMax
@@ -26,6 +27,13 @@ def Perturb_Circle_Position():
     elif fourSidedDieRoll == 4:
         x = x + 1
 
+def Scale_XY(num, minimum, maximum, scalingMin, scalingMax):
+    if (xMax == xMin) or (yMax == yMin):
+        return 250
+    else:
+        return int(scalingMin + (num - minimum) * ((scalingMax - scalingMin) / (maximum - minimum)))
+
+
 def Handle_Frame(frame):
     global x, y, xMin, xMax, yMin, yMax
     hand = frame.hands[0]
@@ -44,7 +52,6 @@ def Handle_Frame(frame):
         yMin = y
     if (y > yMax):
         yMax = y
-    print(yMax)
 
 controller = Leap.Controller()
 
@@ -56,8 +63,9 @@ while True:
     pygameWindow.Prepare()
     if not frame.hands.is_empty:
         Handle_Frame(frame)
-#    Perturb_Circle_Position()
-    pygameWindow.Draw_Black_Circle(x,y)
+    pygameX = Scale_XY(x, xMin, xMax, 0, pygameWindowWidth)
+    pygameY = Scale_XY(y, yMin, yMax, pygameWindowDepth, 0)
+    pygameWindow.Draw_Black_Circle(pygameX, pygameY)
     pygameWindow.Reveal()
 
 

@@ -8,6 +8,9 @@ class PYGAME_WINDOW:
 
     def Prepare(self):
         self.screen.fill(WHITE)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                    self.done = True
 
     def Reveal(self):
         pygame.display.update()
