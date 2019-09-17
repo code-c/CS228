@@ -10,6 +10,7 @@ pygameWindow = PYGAME_WINDOW()
 
 class DELIVERABLE:
     def __init__(self):
+        self.saves = 0
         self.controller = Leap.Controller()
         self.xMin = -200.0
         self.xMax = 200.0
@@ -84,7 +85,8 @@ class DELIVERABLE:
             return False
 
     def Save_Gesture(self):
-        pickleOut = open("gesture.p", "wb")
+        pickleOut = open("userData/gesture"+str(self.saves)+".p", "wb")
         pickle.dump(self.gestureData, pickleOut)
         pickleOut.close()
+        self.saves += 1 
 
