@@ -19,5 +19,9 @@ class PYGAME_WINDOW:
     def Draw_Black_Circle(self,x,y):
         pygame.draw.circle(self.screen, BLACK, (x, y), 20)
 
-    def Draw_Black_Line(self, xBase, yBase, xTip, yTip, b):
-        pygame.draw.line(self.screen, BLACK, (xBase, yBase), (xTip, yTip), (3-b))
+    def Draw_Line(self, xBase, yBase, xTip, yTip, b, numHands):
+        if numHands == 1:
+            color = RED
+        else:
+            color = GREEN
+        pygame.draw.line(self.screen, color, (xBase, yBase), (xTip, yTip), (3-b))
