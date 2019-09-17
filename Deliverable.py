@@ -43,9 +43,9 @@ class DELIVERABLE:
             self.gestureData[fingerID, b, 0] = base.x
             self.gestureData[fingerID, b, 1] = base.z
             self.gestureData[fingerID, b, 2] = base.y
-            self.gestureData[fingerID, b, 3] = base.x
-            self.gestureData[fingerID, b, 4] = base.z
-            self.gestureData[fingerID, b, 5] = base.y
+            self.gestureData[fingerID, b, 3] = tip.x
+            self.gestureData[fingerID, b, 4] = tip.z
+            self.gestureData[fingerID, b, 5] = tip.y
 
     def Handle_Finger(self, finger, fingerID):
         for b in range(0,4):

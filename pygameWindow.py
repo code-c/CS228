@@ -21,3 +21,6 @@ class PYGAME_WINDOW:
 
     def Draw_Black_Line(self, xBase, yBase, xTip, yTip, b):
         pygame.draw.line(self.screen, BLACK, (xBase, yBase), (xTip, yTip), (3-b))
+
+    def Draw_Line(self, xBase, yBase, xTip, yTip):
+        pygame.draw.line(self.screen, BLUE, (xBase, yBase), (xTip, yTip))
