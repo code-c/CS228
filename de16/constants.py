@@ -1,5 +1,5 @@
-pygameWindowWidth = 500
-pygameWindowDepth = 500
+pygameWindowWidth = 800
+pygameWindowDepth = 800
 BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
 BLUE =  (  0,   0, 255)
