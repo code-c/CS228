@@ -43,7 +43,7 @@ class KNN:
     #
     #     return result
 
-    
+
     # The Faster Predict Function
     #   modified by Sida Liu (sliu1), 2019/09/24
     # testFeatures can be in shape (2000, 30) or shape (30,)
@@ -69,6 +69,7 @@ class KNN:
             # check trainY for answers
             neighbors = self.trainY[first_k_neighbor_index]
             # count the answers, give the final answer
+            neighbors = neighbors.astype(int)
             prediction = np.argmax( np.bincount(neighbors) )
             # save final answer to a list
             predictions.append(prediction)

@@ -32,12 +32,23 @@ def Handle_Vector_From_Leap(v):
     return pygameX, pygameY
 
 def Handle_Bone(bone, b):
+    global k
     base = bone.prev_joint
     tip = bone.next_joint
+    xTip = tip.x
+    yTip = tip.z
+    zTip = tip.y
+
+    if ((b==0) or (b==3)):
+        testData[0,k] = xTip
+        testData[0, k+1] = yTip
+        testData[0, k+2] = zTip
+        k = k + 3
+
     baseX, baseY = Handle_Vector_From_Leap(base)
     tipX, tipY = Handle_Vector_From_Leap(tip)
     pygameWindow.Draw_Black_Line(baseX, baseY, tipX, tipY, b)
-    
+
 def Handle_Finger(finger):
     for b in range(0,4):
         Handle_Bone(finger.bone(b), b)
@@ -69,15 +80,15 @@ def centerData(data):
     allXCoordinates = data[0,::3]
     meanXValue = allXCoordinates.mean()
     data[0,::3] = allXCoordinates - meanXValue
-   
+
     allYCoordinates = data[0,1::3]
     meanYValue = allYCoordinates.mean()
     data[0,1::3] = allYCoordinates - meanYValue
-   
+
     allZCoordinates = data[0,2::3]
     meanZValue = allZCoordinates.mean()
     data[0,2::3] = allZCoordinates - meanZValue
-  
+
     return data
 
 
@@ -89,29 +100,28 @@ y = 250
 
 while True:
     frame = controller.frame()
-    if (len(frame.hands)>0):
-        k = 0
-        fingers = frame.hands[0].fingers
-        for finger in fingers:
-            for b in range(0, 4):
-                bone = finger.bone(b)
-                tip = bone.next_joint
-                xTip = tip.x
-                yTip = tip.z
-                zTip = tip.y
-
-                if ((b==0) or (b==3)):
-                    testData[0,k] = xTip
-                    testData[0, k+1] = yTip
-                    testData[0, k+2] = zTip
-                    k = k + 3
-        testData = centerData(testData)
-        predictClass = clf.Predict(testData)
-        print(predictClass)
+    # if (len(frame.hands)>0):
+    #     fingers = frame.hands[0].fingers
+    #     for finger in fingers:
+    #         for b in range(0, 4):
+    #             bone = finger.bone(b)
+    #             tip = bone.next_joint
+    #             xTip = tip.x
+    #             yTip = tip.z
+    #             zTip = tip.y
+    #
+    #             if ((b==0) or (b==3)):
+    #                 testData[0,k] = xTip
+    #                 testData[0, k+1] = yTip
+    #                 testData[0, k+2] = zTip
+    #                 k = k + 3
     pygameWindow.Prepare()
     if not frame.hands.is_empty:
+        k = 0
         Handle_Frame(frame)
+        testData = centerData(testData)
+        print(testData)
+        predictClass = clf.Predict(testData)
+        print(predictClass)
     #pygameWindow.Draw_Black_Circle(pygameX, pygameY)
     pygameWindow.Reveal()
-
-
